@@ -13,12 +13,14 @@
     "dependencies": {
         "express": "^5.1.0",
         "firebase-admin": "^13.7.0",
-        "joi": "^18.0.2"
+        "joi": "^18.0.2",
+        "morgan": "^1.10.1"
     },
     "devDependencies": {
         "@types/express": "^5.0.2",
         "@types/jest": "^29.5.14",
         "@types/joi": "^17.2.2",
+        "@types/morgan": "^1.9.10",
         "@types/node": "^22.15.24",
         "jest": "^30.0.0",
         "ts-jest": "^29.2.5",

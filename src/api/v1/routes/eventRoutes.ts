@@ -32,3 +32,5 @@ router.delete(
     "/events/:id",
     eventController.deleteEventHandler
 );
+
+export default router;
