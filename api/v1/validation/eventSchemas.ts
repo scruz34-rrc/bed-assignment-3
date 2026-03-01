@@ -18,6 +18,13 @@ export const eventSchemas = {
                 "string.empty": "\"name\" is required",
                 "string.min": "\"name\" length must be at least 3 characters long"
             }),
+
+            date: Joi.string().required().isoDate().custom(futureDate, "Future date validation").messages({
+                "any.required": "\"date\" is required",
+                "string.empty": "\"date\" is required",
+                "string.isoDate": "\"date\" must be a valid ISO date format",
+                "date.future": "\"date\" must be greater than \"now\""
+            }),
         })
     }
 }
