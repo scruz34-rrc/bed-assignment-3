@@ -7,3 +7,9 @@ interface RequestSchemas {
     params?: ObjectSchema;
     query?: ObjectSchema;
 }
+
+interface ValidationOptions {
+    stripBody?: boolean;
+    stripQuery?: boolean;
+    stripParams?: boolean;
+}
