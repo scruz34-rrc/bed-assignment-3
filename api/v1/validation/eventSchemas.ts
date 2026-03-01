@@ -25,6 +25,13 @@ export const eventSchemas = {
                 "string.isoDate": "\"date\" must be a valid ISO date format",
                 "date.future": "\"date\" must be greater than \"now\""
             }),
+
+            capacity: Joi.number().required().integer().min(5).messages({
+                "any.required": "\"capacity\" is required",
+                "number.base": "\"capacity\" must be a number",
+                "number.integer": "\"capacity\" must be an integer",
+                "number.min": "\"capacity\" must be greater than or equal to 5"
+            }),
         })
     }
 }
