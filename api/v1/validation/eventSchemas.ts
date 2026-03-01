@@ -39,6 +39,10 @@ export const eventSchemas = {
                 "number.min": "\"registrationCount\" must be greater than or equal to 0",
                 "number.max": "\"registrationCount\" must be less than or equal to ref:capacity"
             }),
+
+            status: Joi.string().optional().valid("active", "cancelled", "completed").messages({
+                "any.only": "\"status\" must be one of [active, cancelled, completed]"
+            }),
         })
     }
 }
