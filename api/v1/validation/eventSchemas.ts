@@ -43,6 +43,10 @@ export const eventSchemas = {
             status: Joi.string().optional().valid("active", "cancelled", "completed").messages({
                 "any.only": "\"status\" must be one of [active, cancelled, completed]"
             }),
+
+            category: Joi.string().optional().valid("conference", "workshop", "meetup", "seminar", "general").messages({
+                "any.only": "\"category\" must be one of [conference, workshop, meetup, seminar, general]"
+            })
         })
     }
 }
