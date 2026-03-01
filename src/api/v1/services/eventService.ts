@@ -3,6 +3,13 @@ import * as firestoreRepository from "../repositories/firestoreRepository";
 
 const COLLECTION_NAME = "events";
 
+let lastEventId = 0;
+
+const generateEventId = (): string => {
+    lastEventId++;
+    return `evt_${String(lastEventId).padStart(6, '0')}`;
+};
+
 export const getAllEvents = async (): Promise<Event[]> => {
     try {
         const snapshot = await firestoreRepository.getDocuments(COLLECTION_NAME);
@@ -17,10 +24,10 @@ export const getAllEvents = async (): Promise<Event[]> => {
         });
         
         return events;
-    } 
-    
+    }
+
     catch (error) {
-        throw new Error(`Failed to fetch events: ${error instanceof Error ? error.message : "Unknown error"}`);
+        throw new Error("Failed to delete event");
     }
 };
 
@@ -37,29 +44,39 @@ export const getEventById = async (id: string): Promise<Event | null> => {
             id: doc.id,
             ...data
         } as Event;
-    } catch (error) {
-        throw new Error(`Failed to fetch event: ${error instanceof Error ? error.message : "Unknown error"}`);
+    }
+
+    catch (error) {
+        throw new Error("Failed to delete event");
     }
 };
 
 export const createEvent = async (eventData: CreateEventRequest): Promise<Event> => {
     try {
         const now = new Date().toISOString();
+        
         const newEvent = {
-            ...eventData,
-            status: "active",
+            name: eventData.name,
+            date: eventData.date,
+            capacity: eventData.capacity,
+            registrationCount: eventData.registrationCount ?? 0,
+            status: eventData.status ?? "active",
+            category: eventData.category ?? "general",
             createdAt: now,
             updatedAt: now
         };
         
-        const id = await firestoreRepository.createDocument(COLLECTION_NAME, newEvent);
+        const id = generateEventId();
+        await firestoreRepository.createDocument(COLLECTION_NAME, newEvent, id);
         
         return {
             id,
             ...newEvent
         } as Event;
-    } catch (error) {
-        throw new Error(`Failed to create event: ${error instanceof Error ? error.message : "Unknown error"}`);
+    }
+
+    catch (error) {
+        throw new Error("Failed to delete event");
     }
 };
 
@@ -80,9 +97,12 @@ export const updateEvent = async (id: string, updates: UpdateEventRequest): Prom
         
         const updatedEvent = await getEventById(id);
         return updatedEvent;
-    } catch (error) {
-        throw new Error(`Failed to update event: ${error instanceof Error ? error.message : "Unknown error"}`);
     }
+    
+    catch (error) {
+        throw new Error("Failed to delete event");
+    }
+
 };
 
 export const deleteEvent = async (id: string): Promise<boolean> => {
@@ -95,7 +115,9 @@ export const deleteEvent = async (id: string): Promise<boolean> => {
         
         await firestoreRepository.deleteDocument(COLLECTION_NAME, id);
         return true;
-    } catch (error) {
-        throw new Error(`Failed to delete event: ${error instanceof Error ? error.message : "Unknown error"}`);
+    }
+
+    catch (error) {
+        throw new Error("Failed to delete event");
     }
 };
