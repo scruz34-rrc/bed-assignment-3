@@ -32,6 +32,13 @@ export const eventSchemas = {
                 "number.integer": "\"capacity\" must be an integer",
                 "number.min": "\"capacity\" must be greater than or equal to 5"
             }),
+
+            registrationCount: Joi.number().optional().integer().min(0).max(Joi.ref("capacity")).messages({
+                "number.base": "\"registrationCount\" must be a number",
+                "number.integer": "\"registrationCount\" must be an integer",
+                "number.min": "\"registrationCount\" must be greater than or equal to 0",
+                "number.max": "\"registrationCount\" must be less than or equal to ref:capacity"
+            }),
         })
     }
 }
