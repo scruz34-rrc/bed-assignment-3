@@ -18,3 +18,12 @@ export interface CreateEventRequest {
     status?: 'active' | 'cancelled' | 'completed';
     category?: 'conference' | 'workshop' | 'meetup' | 'seminar' | 'general';
 }
+
+export interface UpdateEventRequest {
+    name?: string;
+    date?: string;
+    capacity?: number;
+    registrationCount?: number;
+    status?: 'active' | 'cancelled' | 'completed';
+    category?: 'conference' | 'workshop' | 'meetup' | 'seminar' | 'general';
+}
