@@ -26,18 +26,5 @@
         "ts-jest": "^29.2.5",
         "ts-node": "^10.9.2",
         "typescript": "^5.8.3"
-    },
-    "jest": {
-        "preset": "ts-jest",
-        "testEnvironment": "node",
-        "roots": [
-            "<rootDir>/test"
-        ],
-        "testMatch": [
-            "**/*.test.ts"
-        ],
-        "transform": {
-            "^.+\\.ts$": "ts-jest"
-        }
     }
 }

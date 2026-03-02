@@ -33,18 +33,18 @@ export const eventSchemas = {
                 "number.min": "\"capacity\" must be greater than or equal to 5"
             }),
 
-            registrationCount: Joi.number().optional().integer().min(0).max(Joi.ref("capacity")).messages({
+            registrationCount: Joi.number().optional().integer().min(0).max(Joi.ref("capacity")).default(0).messages({
                 "number.base": "\"registrationCount\" must be a number",
                 "number.integer": "\"registrationCount\" must be an integer",
                 "number.min": "\"registrationCount\" must be greater than or equal to 0",
                 "number.max": "\"registrationCount\" must be less than or equal to ref:capacity"
             }),
 
-            status: Joi.string().optional().valid("active", "cancelled", "completed").messages({
+            status: Joi.string().optional().valid("active", "cancelled", "completed").default("active").messages({
                 "any.only": "\"status\" must be one of [active, cancelled, completed]"
             }),
 
-            category: Joi.string().optional().valid("conference", "workshop", "meetup", "seminar", "general").messages({
+            category: Joi.string().optional().valid("conference", "workshop", "meetup", "seminar", "general").default("general").messages({
                 "any.only": "\"category\" must be one of [conference, workshop, meetup, seminar, general]"
             })
         })
