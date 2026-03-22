@@ -5,6 +5,29 @@ const COLLECTION_NAME = "events";
 
 let lastEventId = 0;
 
+export const initializeLastEventId = async (): Promise<void> => {
+    try {
+        const snapshot = await firestoreRepository.getDocuments(COLLECTION_NAME);
+        let maxNumericId = 0;
+        
+        snapshot.forEach((doc) => {
+            const id = doc.id;
+            if (id && id.startsWith('evt_')) {
+                const numericPart = parseInt(id.replace('evt_', ''), 10);
+                if (!isNaN(numericPart) && numericPart > maxNumericId) {
+                    maxNumericId = numericPart;
+                }
+            }
+        });
+        
+        lastEventId = maxNumericId;
+        console.log(`Last event ID initialized to: ${lastEventId}`);
+    } catch (error) {
+        console.error("Failed to initialize lastEventId:", error);
+        lastEventId = 0;
+    }
+};
+
 const generateEventId = (): string => {
     lastEventId++;
     return `evt_${String(lastEventId).padStart(6, '0')}`;
