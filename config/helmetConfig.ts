@@ -25,5 +25,10 @@ export const getHelmetConfig = () => {
         },
         frameguard: { action: "deny" },
         referrerPolicy: { policy: "no-referrer" },
+        dnsPrefetchControl: { allow: false },
+        crossOriginResourcePolicy: { policy: "same-origin" },
+        crossOriginOpenerPolicy: { policy: "same-origin" },
+        xssFilter: true,
+        ieNoOpen: true,
     });
 };
