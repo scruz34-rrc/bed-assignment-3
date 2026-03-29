@@ -1,22 +1,22 @@
-import helmet from "helmet";
+import helmet, { HelmetOptions } from "helmet";
 
-export const getHelmetConfig = () => {
+export const getHelmetConfig = (): HelmetOptions => {
     const isDevelopment = process.env.NODE_ENV === "development";
 
-    const baseConfig = {
+    const baseConfig: HelmetOptions = {
         contentSecurityPolicy: false,
         hidePoweredBy: true,
         noSniff: true,
     };
 
     if (isDevelopment) {
-        return helmet({
+        return {
             ...baseConfig,
             hsts: false,
-        });
+        };
     }
 
-    return helmet({
+    return {
         ...baseConfig,
         hsts: {
             maxAge: 31536000,
@@ -30,5 +30,5 @@ export const getHelmetConfig = () => {
         crossOriginOpenerPolicy: { policy: "same-origin" },
         xssFilter: true,
         ieNoOpen: true,
-    });
+    };
 };
