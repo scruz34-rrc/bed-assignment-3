@@ -1,0 +1,41 @@
+export interface Event {
+    id: string;
+    name: string;
+    date: string;
+    capacity: number;
+    registrationCount: number;
+    status: 'active' | 'cancelled' | 'completed';
+    category: 'conference' | 'workshop' | 'meetup' | 'seminar' | 'general';
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface CreateEventRequest {
+    name: string;
+    date: string;
+    capacity: number;
+    registrationCount?: number;
+    status?: 'active' | 'cancelled' | 'completed';
+    category?: 'conference' | 'workshop' | 'meetup' | 'seminar' | 'general';
+}
+
+export interface UpdateEventRequest {
+    name?: string;
+    date?: string;
+    capacity?: number;
+    registrationCount?: number;
+    status?: 'active' | 'cancelled' | 'completed';
+    category?: 'conference' | 'workshop' | 'meetup' | 'seminar' | 'general';
+}
+
+export interface EventResponse {
+    id: string;
+    name: string;
+    date: string;
+    capacity: number;
+    registrationCount: number;
+    status: string;
+    category: string;
+    createdAt: string;
+    updatedAt: string;
+}
