@@ -37,6 +37,29 @@ router.get("/health", (req, res) => {
     });
 });
 
+/**
+ * @openapi
+ * /events:
+ *   get:
+ *     summary: Retrieve all events
+ *     tags: [Events]
+ *     responses:
+ *       '200':
+ *         description: Events retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 count:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Event'
+ */
 router.get("/events", eventController.getAllEventsHandler);
 router.post(
     "/events", 
