@@ -61,6 +61,34 @@ router.get("/health", (req, res) => {
  *                     $ref: '#/components/schemas/Event'
  */
 router.get("/events", eventController.getAllEventsHandler);
+
+/**
+ * @openapi
+ * /events:
+ *   post:
+ *     summary: Create a new event
+ *     tags: [Events]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateEventRequest'
+ *     responses:
+ *       '201':
+ *         description: Event created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   $ref: '#/components/schemas/Event'
+ *       '400':
+ *         description: Invalid input data
+ */
 router.post(
     "/events", 
     validateRequest(eventSchemas.create), 
