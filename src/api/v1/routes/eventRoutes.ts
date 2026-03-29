@@ -166,6 +166,26 @@ router.put(
     "/events/:id",
     eventController.updateEventHandler
 );
+
+/**
+ * @openapi
+ * /events/{id}:
+ *   delete:
+ *     summary: Delete an event
+ *     tags: [Events]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The unique identifier of the event
+ *     responses:
+ *       '200':
+ *         description: Event deleted successfully
+ *       '404':
+ *         description: Event not found
+ */
 router.delete(
     "/events/:id",
     eventController.deleteEventHandler
