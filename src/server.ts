@@ -1,16 +1,17 @@
-export function greet(name: string): string {
-    const message = "Hello, " + name; // Place breakpoint here for debugging
-    console.log(message);
-    return message;
-}
+import app from "./app";
+import {Server} from "http";
+import { initializeLastEventId } from "./api/v1/services/eventService";
 
-export function add(a: number, b: number): number {
-    const result = a + b; // Place breakpoint here for debugging
-    return result;
-}
+const PORT: string | number = process.env.PORT || 3000;
 
-// Run the function when executed directly
-if (require.main === module) {
-    greet("World");
-    add(5, 3);
-}
+let server: Server;
+initializeLastEventId().then(() => {
+    server = app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+}).catch(error => {
+    console.error("Failed to initialize:", error);
+    process.exit(1);
+});
+
+export { server };
